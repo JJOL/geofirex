@@ -131,6 +131,7 @@ export class GeoFireQuery<T = any> {
   }
 
   private queryPoint(geohash: string, field: string) {
+    console.log('MYDEBUG: Going to query hash: '+geohash);
     const end = geohash + '~';
     return (this.ref as fb.firestore.CollectionReference)
       .orderBy(`${field}.geohash`)
@@ -154,6 +155,7 @@ export class GeoFireQuery<T = any> {
 
 function snapToData(id = 'id') {
   return map((querySnapshot: fb.firestore.QuerySnapshot) =>
+    console.log('Processing incoming snaps!');
     querySnapshot.docs.map(v => {
       return {
         ...(id ? { [id]: v.id } : null),
