@@ -154,15 +154,15 @@ export class GeoFireQuery<T = any> {
 }
 
 function snapToData(id = 'id') {
-  return map((querySnapshot: fb.firestore.QuerySnapshot) =>
+  return map((querySnapshot: fb.firestore.QuerySnapshot) => {
     console.log('Processing incoming snaps!');
-    querySnapshot.docs.map(v => {
+    return querySnapshot.docs.map(v => {
       return {
         ...(id ? { [id]: v.id } : null),
         ...v.data()
       };
-    })
-  );
+    });
+  });
 }
 
 /**
